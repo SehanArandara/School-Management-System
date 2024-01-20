@@ -26,15 +26,37 @@ public class SubjectCtrl {
     }
 
     @GetMapping
-    public ResponseEntity<List<Subject>> getAllSubjects(){
-        List<Subject> subjects = subjectService.getAllSubjects();
-        return new ResponseEntity<>(subjects,HttpStatus.OK);
+    public List<Subject> getAllSubjects(){
+        return subjectService.getAllSubjects();
     }
 
-//    @GetMapping("{subjectId}")
-//    public ResponseEntity<Object> getSubjectById (@PathVariable String subjectId){
-//        return subjectService.getSingleSubject(subjectId)
-//                .map(subject -> new ResponseEntity<>(subject,HttpStatus.OK))
-//                .orElseGet(()-> new ResponseEntity<>("subject not found",HttpStatus.NOT_FOUND));
-//    }
+    @GetMapping("{subjectId}")
+    public ResponseEntity<Object> getSubjectById (@PathVariable String subjectId){
+       try{
+           Subject subject = subjectService.getSingleSubject(subjectId);
+           return new ResponseEntity<>(subject,HttpStatus.OK);
+       }catch (ResourceNotFoundException e){
+           return new ResponseEntity<>(e.getMessage(),HttpStatus.NOT_FOUND);
+       }
+    }
+
+    @PutMapping("/{subjectId}")
+    public ResponseEntity<Object> updateSubject(@PathVariable String subjectId,@RequestBody Subject subject){
+        try{
+            subjectService.updateSubject(subjectId,subject);
+            return new ResponseEntity<>(subject,HttpStatus.OK);
+        }catch (ResourceNotFoundException e){
+            return new ResponseEntity<>(e.getMessage(),HttpStatus.NOT_FOUND);
+        }
+    }
+
+    @DeleteMapping("/{subjectId}")
+    public ResponseEntity<Object> deleteSubject(@PathVariable String subjectId){
+        try{
+            subjectService.deleteSubject(subjectId);
+            return new ResponseEntity<>("Subject under Id :"+subjectId+"is deleted",HttpStatus.OK);
+        }catch (ResourceNotFoundException e){
+            return new ResponseEntity<>(e.getMessage(),HttpStatus.NOT_FOUND);
+        }
+    }
 }
