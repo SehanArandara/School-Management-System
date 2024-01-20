@@ -30,7 +30,7 @@ public class SubjectCtrl {
         return subjectService.getAllSubjects();
     }
 
-    @GetMapping("{subjectId}")
+    @GetMapping("/{subjectId}")
     public ResponseEntity<Object> getSubjectById (@PathVariable String subjectId){
        try{
            Subject subject = subjectService.getSingleSubject(subjectId);
