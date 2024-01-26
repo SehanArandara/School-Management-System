@@ -6,6 +6,7 @@
       <list>
         <option value="$PROJECT_DIR$/Backend/student-management/pom.xml" />
         <option value="$PROJECT_DIR$/Backend/teachers-management/pom.xml" />
+        <option value="$PROJECT_DIR$/Backend/library-management/pom.xml" />
       </list>
     </option>
   </component>

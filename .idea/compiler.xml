@@ -8,12 +8,14 @@
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
         <module name="student-management" />
+        <module name="library-management" />
         <module name="teachers-management" />
       </profile>
     </annotationProcessing>
   </component>
   <component name="JavacSettings">
     <option name="ADDITIONAL_OPTIONS_OVERRIDE">
+      <module name="library-management" options="-parameters" />
       <module name="student-management" options="-parameters" />
       <module name="teachers-management" options="-parameters" />
     </option>
