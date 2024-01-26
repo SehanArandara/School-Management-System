@@ -6,23 +6,19 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.RequiredArgsConstructor;
 
-import java.util.ArrayList;
-import java.util.List;
-
 @Entity
 @RequiredArgsConstructor
 @AllArgsConstructor
 @Builder
 @Data
-public class User {
+public class Book {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long userId;
-    private String firstName;
-    private String lastName;
-    private String email;
-    private String phoneNumber;
+    private Long Bookid;
+    private String title;
 
-    @OneToMany(mappedBy = "user",cascade = CascadeType.ALL)
-    private List<Book> books = new ArrayList<>();
+    @ManyToOne
+    @JoinColumn(name = "user_id")
+    private User user;
 }
